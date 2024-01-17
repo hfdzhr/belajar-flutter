@@ -1,6 +1,5 @@
-# belajar_flutter
-
-A new Flutter project.
+# Belajar Flutter Dasar
+Belajar Flutter dasar untuk Ujikom
 
 ## Getting Started
 
