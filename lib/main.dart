@@ -1,5 +1,6 @@
+// import 'package:belajar_flutter/column_widget.dart';
+import 'package:belajar_flutter/latihan_column_row.dart';
 import 'package:flutter/material.dart';
-import 'latihan_container.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,8 +20,7 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.blue[200],
             centerTitle: true,
           ),
-          body: LatihanContainer(),
-          backgroundColor: Colors.blue[200],
+          body: LatihanColumnRow(),
         ));
   }
 }
