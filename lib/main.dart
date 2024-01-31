@@ -8,6 +8,10 @@
 import 'package:belajar_flutter/grid_build.dart';
 import 'package:belajar_flutter/grid_count.dart';
 import 'package:belajar_flutter/grid_view.dart';
+import 'package:belajar_flutter/latihan_list_view.dart';
+import 'package:belajar_flutter/latihan_list_view_2.dart';
+import 'package:belajar_flutter/navigation/home.dart';
+import 'package:belajar_flutter/navigation/latihan_navigation.dart';
 import 'package:belajar_flutter/ujian_grid_list.dart';
 import 'package:belajar_flutter/ujian_list_view.dart';
 import 'package:flutter/material.dart';
@@ -24,15 +28,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Belajar Flutter',
-        home: Scaffold(
-          appBar: AppBar(
-            title: Text('Latihan GridView'),
-            backgroundColor: const Color.fromARGB(255, 194, 214, 230),
-            centerTitle: true,
-          ),
-          body: UjianGridList(),
-          bottomNavigationBar: BottomNavigationExample(),
-        ));
+        initialRoute: '/',
+        routes: {
+          '/': (context) => Home(),
+          '/tugasgrid': (context) => UjianGridList(),
+          '/tugaslist': (context) => UjianListView(),
+          '/gridview': (context) => LatihanGridView(),
+          '/listview': (context) => LatihanListView(),
+          '/gridcount': (context) => LatihanGridCount(),
+          '/listview2': (context) => LatihanListView2()
+        });
   }
 }
 
