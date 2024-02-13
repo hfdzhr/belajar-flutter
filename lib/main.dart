@@ -12,9 +12,16 @@ import 'package:belajar_flutter/latihan_list_view.dart';
 import 'package:belajar_flutter/latihan_list_view_2.dart';
 import 'package:belajar_flutter/navigation/home.dart';
 import 'package:belajar_flutter/navigation/latihan_navigation.dart';
+import 'package:belajar_flutter/screens/detail_fauna_screen.dart';
+import 'package:belajar_flutter/screens/form_screen.dart';
+import 'package:belajar_flutter/screens/list_fauna_screen.dart';
+import 'package:belajar_flutter/screens/login_screen.dart';
+import 'package:belajar_flutter/screens/register_screen.dart';
 import 'package:belajar_flutter/ujian_grid_list.dart';
 import 'package:belajar_flutter/ujian_list_view.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
 void main() {
   runApp(const MyApp());
@@ -26,34 +33,50 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Belajar Flutter',
-        initialRoute: '/',
-        routes: {
-          '/': (context) => Home(),
-          '/tugasgrid': (context) => UjianGridList(),
-          '/tugaslist': (context) => UjianListView(),
-          '/gridview': (context) => LatihanGridView(),
-          '/listview': (context) => LatihanListView(),
-          '/gridcount': (context) => LatihanGridCount(),
-          '/listview2': (context) => LatihanListView2()
-        });
+      debugShowCheckedModeBanner: false,
+      title: 'Belajar Flutter',
+      home: CheckAuth(),
+    );
   }
 }
 
-class BelajarHelloWorld extends StatelessWidget {
-  const BelajarHelloWorld({
-    super.key,
-  });
+class CheckAuth extends StatefulWidget {
+  @override
+  _CheckAuthState createState() => _CheckAuthState();
+}
+
+class _CheckAuthState extends State<CheckAuth> {
+  bool isAuth = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkIfLoggedIn();
+  }
+
+  void _checkIfLoggedIn() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var token = localStorage.getString('token');
+    if (token != null) {
+      if (mounted) {
+        setState(() {
+          isAuth = true;
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Hello World',
-        style: TextStyle(
-            fontSize: 26, fontWeight: FontWeight.bold, color: Colors.red),
-      ),
+    Widget child;
+    if (isAuth) {
+      child = ListFaunaScreen();
+    } else {
+      child = Login();
+    }
+
+    return Scaffold(
+      body: child,
     );
   }
 }
